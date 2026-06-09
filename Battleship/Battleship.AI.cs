@@ -3,7 +3,7 @@
 /// <summary>
 /// 
 /// </summary>
-public sealed class BoardBot : Board
+public sealed class BoardBot : Board 
 {
     #region PRIVATE INSTANCE FIELDS
 
@@ -17,6 +17,36 @@ public sealed class BoardBot : Board
     /// <param name = "name"></param>
     public BoardBot ( string name ) : base ( name ) {}
 
+    #region PUBLIC    OVERRIDE FUNCTIONS
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name = "name"></param>
+    public override void Place ( string name ) 
+    {
+        BotBoat boat = BotBoat.Create( name )!;
+        bool valid = false;
+        int row = -1;
+        int column = -1;
+
+        while ( !valid )
+        {
+            row = this.Generate_Row( this );
+            column = this.Generate_Column( this, row );
+
+            boat.Rotate();
+
+            bool rotation = boat.Get_Rotation();
+
+            if ( !this.Validate_Placement( rotation, boat.Length, row, column ) ) continue;
+            
+            valid = true;
+        }
+        this.Place( boat, row, column );
+    }
+
+    #endregion
     #region PROTECTED OVERRIDE FUNCTIONS
 
     /// <summary>

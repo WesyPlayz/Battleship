@@ -3,7 +3,7 @@
 /// <summary>
 /// 
 /// </summary>
-public static class Manager
+public static class Manager 
 {
     #region INTERNAL STATIC FIELDS
 
@@ -61,7 +61,7 @@ public static class Manager
 /// <summary>
 /// 
 /// </summary>
-public class Board
+public class Board 
 {
     #region INTERNAL  INSTANCE FIELDS
 
@@ -86,6 +86,68 @@ public class Board
         for ( int idx = 0; idx < Manager.Rows; idx++ ) this.Grid[ idx ] = new ( Boat? BOAT, bool STATUS)[ Manager.Columns ];
     }
 
+    #region PUBLIC    VIRTUAL  FUNCTIONS
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name = "name"></param>
+    public virtual void Place ( string name ) 
+    {
+        Console.WriteLine( $"Placing the { name }\n" );
+
+        Boat boat = Boat.Create( name )!;
+        bool valid = false;
+        int row = -1;
+        int column = -1;
+
+        while ( !valid )
+        {
+            row = this.Generate_Row( this );
+            column = this.Generate_Column( this, row );
+
+            boat.Rotate();
+
+            bool rotation = boat.Get_Rotation();
+
+            if ( !this.Validate_Placement( rotation, boat.Length, row, column ) )
+            {
+                Console.WriteLine( $"Unable to place { name } here." );
+                
+                continue;
+            }
+            valid = true;
+        }
+        this.Place( boat, row, column );
+
+        Console.WriteLine();
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public virtual void Hit ( Board board ) 
+    {
+        int row = this.Generate_Row( board );
+        int column = this.Generate_Column( board, row );
+
+        while ( board.Grid[ row ][ column ].STATUS )
+        {
+            Console.WriteLine( "You already hit this coordinate" );
+
+            row = this.Generate_Row( board );
+            column = this.Generate_Column( board, row );
+        }
+        board.Grid[ row ][ column ].STATUS = true;
+
+        Console.WriteLine(
+            board.Grid[ row ][ column ].BOAT == null ? $"{ this.Name } Missed { board.Name }'s boat!" :
+            !board.Grid[ row ][ column ].BOAT!.Hit() ? $"{ this.Name } Hit { board.Name }'s boat!" :
+            $"{ this.Name } Sunk { board.Name }'s { board.Grid[ row ][ column ].BOAT!.Name }!"
+        );
+    }
+
+    #endregion
     #region PROTECTED VIRTUAL  GENERATORS
 
     /// <summary>
@@ -141,6 +203,65 @@ public class Board
             return this.Generate_Column( board, row);
         }
         return column - 1;
+    }
+
+    #endregion
+    #region PROTECTED INSTANCE FUNCTIONS
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name = "rotation"></param>
+    /// <param name = "length"></param>
+    /// <param name = "row"></param>
+    /// <param name = "column"></param>
+    /// <returns></returns>
+    protected bool Validate_Placement ( bool rotation, int length, int row, int column ) 
+    {
+        int veritcal = rotation ? 1 : 0;
+        int horizontal = veritcal == 0 ? 1 : 0;
+
+        int lRow = row + veritcal * ( length - 1 );
+        int lColumn = column + horizontal * ( length - 1 );
+
+        if (
+            row < 0 ||
+            column < 0 ||
+            lRow >= this.Grid.Length ||
+            lColumn >= this.Grid[ row ].Length
+        ) return false;
+
+        for ( int idx = 0; idx < length; idx++ )
+        {
+            int cRow = row + veritcal * idx;
+            int cCol = column + horizontal * idx;
+
+            if ( this.Grid[ cRow ][ cCol ].BOAT != null ) return false;
+        }
+        return true;
+    }
+
+    #endregion
+    #region INTERNAL  INSTANCE FUNCTIONS
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name = "boat"></param>
+    /// <param name = "row"></param>
+    /// <param name = "column"></param>
+    internal void Place ( Boat boat, int row, int column ) 
+    {
+        int veritcal = boat.Get_Rotation() ? 1 : 0;
+        int horizontal = veritcal == 0 ? 1 : 0;
+
+        for ( int idx = 0; idx < boat.Length; idx++ )
+        {
+            int cRow = row + veritcal * idx;
+            int cCol = column + horizontal * idx;
+
+            this.Grid[ cRow][ cCol ].BOAT = boat;
+        }
     }
 
     #endregion

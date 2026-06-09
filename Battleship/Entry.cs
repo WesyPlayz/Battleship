@@ -4,7 +4,7 @@ using Battleship.AI;
 /// <summary>
 /// 
 /// </summary>
-public static class Entry
+public static class Entry 
 {
     #region PUBLIC CONSTANT FIELDS
 
@@ -16,7 +16,7 @@ public static class Entry
     /// <summary>
     /// 
     /// </summary>
-    public static void Main ()
+    public static void Main () 
     {
         Manager.Board_Size( X, Y );
 
