@@ -1,0 +1,75 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\owner\\Documents\\GitHub\\Battleship\\Battleship\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{3C81A597-6CCB-406C-86A0-ED2A3D3C5F16}|Battleship.csproj|c:\\users\\owner\\documents\\github\\battleship\\battleship\\entry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C81A597-6CCB-406C-86A0-ED2A3D3C5F16}|Battleship.csproj|solutionrelative:entry.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C81A597-6CCB-406C-86A0-ED2A3D3C5F16}|Battleship.csproj|c:\\users\\owner\\documents\\github\\battleship\\battleship\\battleship.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C81A597-6CCB-406C-86A0-ED2A3D3C5F16}|Battleship.csproj|solutionrelative:battleship.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C81A597-6CCB-406C-86A0-ED2A3D3C5F16}|Battleship.csproj|c:\\users\\owner\\documents\\github\\battleship\\battleship\\battleship.ai.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C81A597-6CCB-406C-86A0-ED2A3D3C5F16}|Battleship.csproj|solutionrelative:battleship.ai.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Battleship.AI.cs",
+              "DocumentMoniker": "C:\\Users\\owner\\Documents\\GitHub\\Battleship\\Battleship\\Battleship.AI.cs",
+              "RelativeDocumentMoniker": "Battleship.AI.cs",
+              "ToolTip": "C:\\Users\\owner\\Documents\\GitHub\\Battleship\\Battleship\\Battleship.AI.cs",
+              "RelativeToolTip": "Battleship.AI.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-09T12:41:11.589Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Battleship.cs",
+              "DocumentMoniker": "C:\\Users\\owner\\Documents\\GitHub\\Battleship\\Battleship\\Battleship.cs",
+              "RelativeDocumentMoniker": "Battleship.cs",
+              "ToolTip": "C:\\Users\\owner\\Documents\\GitHub\\Battleship\\Battleship\\Battleship.cs",
+              "RelativeToolTip": "Battleship.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-09T12:39:34.953Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Entry.cs",
+              "DocumentMoniker": "C:\\Users\\owner\\Documents\\GitHub\\Battleship\\Battleship\\Entry.cs",
+              "RelativeDocumentMoniker": "Entry.cs",
+              "ToolTip": "C:\\Users\\owner\\Documents\\GitHub\\Battleship\\Battleship\\Entry.cs",
+              "RelativeToolTip": "Entry.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-09T12:38:30.542Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
