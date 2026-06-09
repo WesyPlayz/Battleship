@@ -63,7 +63,7 @@ public static class Manager
 /// </summary>
 public class Board
 {
-    #region INTERNAL INSTANCE FIELDS
+    #region INTERNAL  INSTANCE FIELDS
 
     /// <summary>
     /// 
@@ -86,7 +86,65 @@ public class Board
         for ( int idx = 0; idx < Manager.Rows; idx++ ) this.Grid[ idx ] = new ( Boat? BOAT, bool STATUS)[ Manager.Columns ];
     }
 
-    #region PUBLIC INSTANCE STATUS FUNCTIONS
+    #region PROTECTED VIRTUAL  GENERATORS
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name = "board"></param>
+    /// <returns></returns>
+    protected virtual int Generate_Row ( Board board ) 
+    {
+        Console.Write( $"Please enter a row : ( A-{ ( char )( 'A' + ( board.Grid.Length - 1 ) ) } )" );
+
+        string? rInput = Console.ReadLine();
+
+        if ( rInput == null || !char.TryParse( rInput, out char row ) )
+        {
+            Console.WriteLine( "Invalid Input, must be of type < char >." );
+
+            return this.Generate_Row( board );
+        }
+        row = char.ToUpper( row );
+
+        if ( row < 'A' || row > 'A' + ( board.Grid.Length - 1 ) )
+        {
+            Console.WriteLine( $"Out of range, must fall between A and { ( char )( 'A' + ( board.Grid.Length - 1 ) ) }." );
+
+            return this.Generate_Row( board );
+        }
+        return row - 'A';
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name = "board"></param>
+    /// <param name = "row"></param>
+    /// <returns></returns>
+    protected virtual int Generate_Column ( Board board, int row ) 
+    {
+        Console.Write( $"Please enter a column : ( 1-{ board.Grid[ row ].Length } )" );
+
+        string? cInput = Console.ReadLine();
+
+        if ( string.IsNullOrWhiteSpace( cInput ) || !int.TryParse( cInput, out int column ) )
+        {
+            Console.WriteLine( "Invalid Input, must be of type < int >." );
+
+            return this.Generate_Column( board, row);
+        }
+        else if ( column < 1 || column > board.Grid[ row ].Length )
+        {
+            Console.WriteLine( $"Out of range, must fall between 1 and { board.Grid[ row ].Length }." );
+
+            return this.Generate_Column( board, row);
+        }
+        return column - 1;
+    }
+
+    #endregion
+    #region PUBLIC    INSTANCE STATUS FUNCTIONS
 
     /// <summary>
     /// 
@@ -102,7 +160,7 @@ public class Board
     }
 
     #endregion
-    #region PUBLIC INSTANCE DISPLAY FUNCTIONS
+    #region PUBLIC    INSTANCE DISPLAY FUNCTIONS
 
     /// <summary>
     /// 
@@ -155,16 +213,25 @@ public class Board
 /// <param name = "name"></param>
 internal class Boat ( string name, int length )
 {
+    #region INTERNAL  INSTANCE FIELDS
+
     internal readonly string Name = name;
 
+    #endregion
+    #region PROTECTED INSTANCE FIELDS
+
     protected bool Rotation;
+
+    #endregion
+    #region INTERNAL  INSTANCE PROPERTIES
 
     /// <summary>
     /// 
     /// </summary>
     internal int Length { get; private set; } = length;
 
-    #region INTERNAL STATIC INITIALIZATION
+    #endregion
+    #region INTERNAL  STATIC   INITIALIZATION
 
     /// <summary>
     /// 
@@ -176,6 +243,57 @@ internal class Boat ( string name, int length )
         if ( !Manager.Types.TryGetValue( name, out int dLength ) ) return null;
 
         return new ( name, dLength );
+    }
+
+    #endregion
+    #region INTERNAL  VIRTUAL  FUNCTIONS
+
+    /// <summary>
+    /// 
+    /// </summary>
+    internal virtual void Rotate () 
+    {
+        Console.Write( "Do you wish to rotate this boat? ( Y / N ) " );
+
+        string? rInput = Console.ReadLine();
+
+        if ( string.IsNullOrWhiteSpace( rInput ) )
+        {
+            Console.WriteLine( "Invalid Input, must be of type < string >." );
+
+            this.Rotate();
+        }
+        rInput = rInput!.ToUpper();
+
+        if ( rInput != "Y" && rInput != "N" )
+        {
+            Console.WriteLine( "Invalid Input, must be Y or N." );
+
+            this.Rotate();
+        }
+        this.Rotation = rInput == "Y";
+    }
+
+    #endregion
+    #region INTERNAL  INSTANCE FUNCTIONS
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    internal bool Get_Rotation () => this.Rotation;
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    internal bool Hit () 
+    {
+        this.Length = Math.Max( 0, this.Length - 1 );
+
+        if ( this.Length <= 0 ) return true;
+
+        return false;
     }
 
     #endregion
